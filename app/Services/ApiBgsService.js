@@ -8,7 +8,7 @@ class ApiBgsService {
     async getAllApiQuotes() {
         const res = await quotesApi.get('quotes')
         console.log(res.data)
-        ProxyState.quotes = res.data
+        ProxyState.quotes = new Quote(res.data)
     }
 
     async getAllApiImgs() {
@@ -25,8 +25,8 @@ class ApiBgsService {
 
     async getActiveQuote(qTe) {
         const res = await quotesApi.get(qTe)
-        console.log('hello from activeQuote', res.data)
         ProxyState.quotes = new Quote(res.data)
+        console.log('hello from activeQuote', ProxyState.quotes)
     }
 }
 
