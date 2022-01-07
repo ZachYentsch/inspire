@@ -1,3 +1,4 @@
+import { Quote } from "./Models/RQuote.js"
 import { EventEmitter } from "./Utils/EventEmitter.js"
 import { isValidProp } from "./Utils/isValidProp.js"
 
@@ -5,7 +6,14 @@ class AppState extends EventEmitter {
   /** @type {import('./Models/').[]} */
   apiBgs = []
 
+  quotes = null
+
+  weather = []
+
+  images = []
+
   toDos = []
+
 }
 
 export const ProxyState = new Proxy(new AppState(), {

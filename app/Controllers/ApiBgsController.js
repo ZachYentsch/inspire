@@ -1,7 +1,7 @@
 import { ProxyState } from "../AppState.js"
 import { apiBgsService } from "../Services/ApiBgsService.js"
 
-
+// Get Functions
 async function _getAllQuotes() {
     try {
         await apiBgsService.getAllApiQuotes()
@@ -20,34 +20,36 @@ async function _getAllImgs() {
 
 async function _getWeather() {
     try {
-        await apiBgsService.getAllApiWeather
+        await apiBgsService.getAllApiWeather()
     } catch (error) {
         console.error(error)
     }
 }
-
-function _drawRandomBg() {
-
+// Draw functions
+function _drawRandomQuote() {
+    document.getElementById('quote').innerHTML = `
+    <p>${this.quote}</p>
+    <p><small>${this.author}</small></p>
+    `
 }
-
 
 
 export class ApiBgController {
     constructor() {
         // listeners || subscribers here
-
+        ProxyState.on('quotes', _drawRandomQuote)
         // invoke a function here
         _getAllImgs()
         _getAllQuotes()
         _getWeather()
     }
 
-    // async getActiveToDo() {
-    //     try {
-
-    //     } catch (error) {
-    //         console.error(error)
-    //     }
-    // }
+    async getActiveQuote(qTe) {
+        try {
+            await apiBgsService.ActiveQuote(qTe)
+        } catch (error) {
+            console.error(error)
+        }
+    }
 
 }
