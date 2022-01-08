@@ -5,6 +5,7 @@ export class Quote {
         this.id = data.id
     }
 
+    // ANCHOR injecting this directly to the page
     // get QTemplate() {
     //     return `
     //     <p>${this.quote}</p>

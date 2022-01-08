@@ -14,7 +14,7 @@ class ApiBgsService {
     async getAllApiImgs() {
         const res = await imagesApi.get('images')
         console.log(res.data)
-        // TODO ProxyState.apiBgs = res.data
+        ProxyState.images = new Image(res.data)
     }
 
     async getAllApiWeather() {
@@ -27,6 +27,12 @@ class ApiBgsService {
         const res = await quotesApi.get(qTe)
         ProxyState.quotes = new Quote(res.data)
         console.log('hello from activeQuote', ProxyState.quotes)
+    }
+
+    async getActiveImage(iMg) {
+        const res = await imagesApi.get(iMg)
+        ProxyState.images = new Image(res.data)
+        console.log('hello from activeImage', ProxyState.images)
     }
 }
 

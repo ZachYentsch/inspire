@@ -33,11 +33,15 @@ function _drawRandomQuote() {
     `
 }
 
+function _drawRandomImage() {
+    document.getElementById("RiMg").style.backgroundImage = `"url('${ProxyState.images.img}')"`;
+}
 
 export class ApiBgController {
     constructor() {
         // listeners || subscribers here
         ProxyState.on('quotes', _drawRandomQuote)
+        ProxyState.on('images', _drawRandomImage)
         // invoke a function here
         _getAllImgs()
         _getAllQuotes()
@@ -47,6 +51,14 @@ export class ApiBgController {
     async getActiveQuote(qTe) {
         try {
             await apiBgsService.ActiveQuote(qTe)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    async getActiveImage(iMg) {
+        try {
+            await apiBgsService.ActiveImage(iMg)
         } catch (error) {
             console.error(error)
         }

@@ -10,7 +10,7 @@ class AppState extends EventEmitter {
 
   weather = []
 
-  images = []
+  images = {}
 
   toDos = []
 
