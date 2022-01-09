@@ -1,5 +1,7 @@
 import { ProxyState } from "../AppState.js"
+import { Image } from "../Models/RImage.js"
 import { Quote } from "../Models/RQuote.js"
+import { Weather } from "../Models/RWeather.js"
 import { imagesApi, quotesApi, weatherApi } from "./AxiosService.js"
 
 
@@ -20,7 +22,7 @@ class ApiBgsService {
     async getAllApiWeather() {
         const res = await weatherApi.get('weather')
         console.log(res.data)
-        // TODO ProxyState.apiBgs = res.data
+        ProxyState.weather = new Weather(res.data)
     }
 
     async getActiveQuote(qTe) {

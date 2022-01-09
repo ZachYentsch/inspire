@@ -33,8 +33,15 @@ function _drawRandomQuote() {
     `
 }
 
+async function _drawWeather() {
+    document.getElementById('weather').innerHTML = `
+    <p>${ProxyState.weather.temp}</p>`
+}
+
+// REVIEW NEED HELP DRAWING TO PAGE
+// NOT SURE WHATS GOING WRONG
 function _drawRandomImage() {
-    document.getElementById("RiMg").style.backgroundImage = `"url('${ProxyState.images.img}')"`;
+    document.getElementById("RiMg").style.background = `"url('${ProxyState.images.img}')";`
 }
 
 export class ApiBgController {
@@ -42,6 +49,7 @@ export class ApiBgController {
         // listeners || subscribers here
         ProxyState.on('quotes', _drawRandomQuote)
         ProxyState.on('images', _drawRandomImage)
+        ProxyState.on('weather', _drawWeather)
         // invoke a function here
         _getAllImgs()
         _getAllQuotes()

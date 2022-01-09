@@ -1,3 +1,4 @@
+import { Image } from "./Models/RImage.js"
 import { Quote } from "./Models/RQuote.js"
 import { EventEmitter } from "./Utils/EventEmitter.js"
 import { isValidProp } from "./Utils/isValidProp.js"
@@ -8,9 +9,9 @@ class AppState extends EventEmitter {
 
   quotes = null
 
-  weather = []
+  weather = null
 
-  images = {}
+  images = []
 
   toDos = []
 
