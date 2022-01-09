@@ -16,17 +16,22 @@
 
 <body id="RiMg">
   <header>
-    <nav class="navbar navbar-dark navbar-expand bg-transparent text-light no-select">
+    <nav class="navbar navbar-dark navbar-expand bg-primary no-select d-flex justify-content-between">
       <a class="navbar-brand ms-3" href="#">
-        <span class="ms-2">Aspire to Inspire</span>
+        <span class="ms-2 text-dark">Aspire to Inspire</span>
       </a>
-      <h1 class="text-dark">Weather <span id="weather"></span></h1>
+      <h5 class="text-dark p-4">Weather: <span id="weather" onclick="app.apiBgsController.drawWeather()"></span></h5>
     </nav>
   </header>
   <main>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-12">
+        <div class="col-6" id="clock">
+          <h1 id="clock" class="text-dark"></h1>
+        </div>
+        <div class="col-6 bg-primary">
+          <ol id="toDos" class="text-dark mt-3">
+          </ol>
         </div>
       </div>
     </div>

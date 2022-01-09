@@ -1,4 +1,5 @@
 import { ProxyState } from "../AppState.js"
+import { ApiBgController } from "../Controllers/ApiBgsController.js"
 import { Image } from "../Models/RImage.js"
 import { Quote } from "../Models/RQuote.js"
 import { Weather } from "../Models/RWeather.js"
@@ -36,6 +37,7 @@ class ApiBgsService {
         ProxyState.images = new Image(res.data)
         console.log('hello from activeImage', ProxyState.images)
     }
+
 }
 
 export const apiBgsService = new ApiBgsService()

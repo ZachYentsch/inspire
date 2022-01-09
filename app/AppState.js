@@ -1,19 +1,22 @@
 import { Image } from "./Models/RImage.js"
 import { Quote } from "./Models/RQuote.js"
+import { Todos } from "./Models/Todos.js"
 import { EventEmitter } from "./Utils/EventEmitter.js"
 import { isValidProp } from "./Utils/isValidProp.js"
 
 class AppState extends EventEmitter {
   /** @type {import('./Models/').[]} */
-  apiBgs = []
+  date = []
 
   quotes = null
 
   weather = null
 
-  images = []
+  images = null
 
-  toDos = []
+  toDos = [
+    new Todoss
+  ]
 
 }
 

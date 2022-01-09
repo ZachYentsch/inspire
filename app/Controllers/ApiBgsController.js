@@ -33,10 +33,38 @@ function _drawRandomQuote() {
     `
 }
 
-async function _drawWeather() {
-    document.getElementById('weather').innerHTML = `
-    <p>${ProxyState.weather.temp}</p>`
+async function drawWeather() {
+    let celsius = ProxyState.weather.temp - 273.15
+    let fahr = celsius + 32
+    Math.floor(fahr)
+    document.getElementById('weather').innerHTML = `<p class="selectable">${fahr} F</p>`
+    // REVIEW Can't get the weather to toggle
+    if (drawWeather == celsius) {
+        return `<p class="selectable">${celsius} C</p>`
+    }
 }
+
+// ANCHOR CLOCK FUNCTION
+function currentTime() {
+    let date = new Date();
+    let hour = date.getHours();
+    let min = date.getMinutes();
+    let sec = date.getSeconds();
+    hour = updateTime(hour);
+    min = updateTime(min);
+    sec = updateTime(sec);
+    document.getElementById("clock").innerHTML = hour + " : " + min + " : " + sec
+    let t = setTimeout(function () { currentTime() }, 1000)
+}
+
+function updateTime(k) {
+    if (k < 10) {
+        return "0" + k
+    } else {
+        return k
+    }
+}
+currentTime()
 
 // REVIEW NEED HELP DRAWING TO PAGE
 // NOT SURE WHATS GOING WRONG
@@ -49,7 +77,7 @@ export class ApiBgController {
         // listeners || subscribers here
         ProxyState.on('quotes', _drawRandomQuote)
         ProxyState.on('images', _drawRandomImage)
-        ProxyState.on('weather', _drawWeather)
+        ProxyState.on('weather', drawWeather)
         // invoke a function here
         _getAllImgs()
         _getAllQuotes()
