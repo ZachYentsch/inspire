@@ -16,11 +16,11 @@
 
 <body id="RiMg">
   <header>
-    <nav class="navbar navbar-dark navbar-expand bg-primary no-select d-flex justify-content-between">
+    <nav class="navbar navbar-dark navbar-expand bg-transparent no-select d-flex justify-content-between">
       <a class="navbar-brand ms-3" href="#">
-        <span class="ms-2 text-dark">Aspire to Inspire</span>
+        <span class="ms-2 text-primary">Aspire to Inspire</span>
       </a>
-      <h5 class="text-dark p-4">Weather: <span id="weather" onclick="app.apiBgsController.drawWeather()"></span></h5>
+      <h5 class="text-primary p-4">Weather: <span id="weather"></span></h5>
     </nav>
   </header>
   <main>
@@ -30,28 +30,26 @@
           <h1 id="clock" class="text-dark"></h1>
         </div>
         <div class="row">
-          <div class="col-12 bg-primary">
-            <ol id="toDos" class="text-dark mt-3">
+          <div class="col-md-4 bg-transparent">
+            <form onsubmit="app.todosController.createTodo('${newTodo.user}')">
+              <div class="mb-3 d-flex justify-content-between">
+                <label for="title" class="form-label bg-primary rounded">TO-DO </label>
+                <input type="text" class="form-control" name="title" id="title" min="4" max="20" placeholder="Todo..."
+                  value="" />
+                <button type="submit" class="btn btn-primary rounded"
+                  onclick="app.todosController.createTodo()">+</button>
+              </div>
+          </div>
+          </form>
+          <div class="col-md-8 bg-white rounded">
+            <ol id="toDos" class="text-primary mt-3">
             </ol>
           </div>
         </div>
       </div>
     </div>
-  </main>
-
-  <div class="modal fade" id="todos" tabindex="-1" aria-labelledby="newListingLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-primary text-light">
-          <h5 class="modal-title" id="newTodo">Todo</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" id="modal-body-slot">
-          <!-- FORM INJECTED HERE -->
-        </div>
-      </div>
     </div>
-  </div>
+  </main>
 
   <footer class="bg-dark text-white p-2">
     <div class="text-center no-select p-3" id="quote">

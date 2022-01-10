@@ -5,6 +5,8 @@ import { loadState } from "./Utils/LocalStorage.js";
 
 class App {
   apiBgsController = new ApiBgController()
+
+  todosController = new TodosController()
 }
 
 loadState()

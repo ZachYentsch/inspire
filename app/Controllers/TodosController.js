@@ -1,5 +1,4 @@
 import { ProxyState } from "../AppState.js";
-import { todoForm } from "../Componets/TodoForm.js";
 import { confirmation, toast } from "../Services/AlertService.js";
 import { todosService } from "../Services/TodosService.js";
 
@@ -20,7 +19,7 @@ export class TodosController {
     }
     drawTodos() {
         _drawTodos()
-        document.getElementById('modal-body-slot').innerHTML = todoForm()
+        document.getElementById('todos').innerHTML = template
     }
 
     async createTodo(user) {
@@ -31,13 +30,6 @@ export class TodosController {
                 title: form.title.value,
                 user: user
             }
-            if (user == "undefined") {
-                await todosService.createTodo(todoData)
-            } else {
-                await todosService.editTodo(todoData, user)
-            }
-            form.reset()
-            bootstrap.Modal.getInstance(document.getElementById('todos')).hide()
         } catch (error) {
             console.log(error.message)
         }
@@ -56,17 +48,15 @@ export class TodosController {
         }
     }
 
-    async editTodo(user) {
-        try {
-            let foundTodo = ProxyState.toDos.find(t => t.user == user)
+    // async editTodo(user) {
+    //     try {
+    //         let foundTodo = ProxyState.toDos.find(t => t.user == user)
 
-            bootstrap.Modal.getOrCreateInstance(document.getElementById('todos')).toggle()
+    //         document.getElementById('todos').innerHTML =
 
-            document.getElementById('modal-body-slot').innerHTML = todoForm(foundTodo)
-
-            console.log('todo in Edit', foundTodo)
-        } catch {
-            console.log('error.message');
-        }
-    }
+    //         console.log('todo in Edit', foundTodo)
+    //     } catch {
+    //         console.log('error.message');
+    //     }
+    // }
 }

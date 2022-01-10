@@ -36,12 +36,14 @@ function _drawRandomQuote() {
 async function drawWeather() {
     let celsius = ProxyState.weather.temp - 273.15
     let fahr = celsius + 32
-    document.getElementById('weather').innerHTML = `<p>${fahr} F</p>`
-    // REVIEW Can't get the weather to toggle
-    if (drawWeather == celsius) {
-        return `<p class="selectable">${celsius} C</p>`
-    }
+    document.getElementById('weather').innerHTML = `<p class="selectable" onclick="app.apiBgsController.convertW()">${fahr} F</p>`
 }
+
+async function convertW() {
+    let celsius = ProxyState.weather.temp - 273.15
+    document.getElementById('weather').innerHTML = `<p class="selectable" onclick="app.apiBgsController.drawWeather()>${celsius} C</p>`
+}
+
 
 // ANCHOR CLOCK FUNCTION
 function currentTime() {
@@ -65,10 +67,10 @@ function updateTime(k) {
 }
 currentTime()
 
-// REVIEW NEED HELP DRAWING TO PAGE
-// NOT SURE WHATS GOING WRONG
+// REVIEW Remember double strings get swapped for backticks
 function _drawRandomImage() {
-    document.getElementById("RiMg").style.background = `"url('${ProxyState.images.img}')";`
+    console.log(ProxyState.images.img)
+    document.getElementById("RiMg").style.backgroundImage = `url('${ProxyState.images.img}')`
 }
 
 export class ApiBgController {
@@ -76,7 +78,7 @@ export class ApiBgController {
         // listeners || subscribers here
         ProxyState.on('quotes', _drawRandomQuote)
         ProxyState.on('images', _drawRandomImage)
-        ProxyState.on('weather', drawWeather)
+        ProxyState.on('weather', drawWeather || convertW)
         // invoke a function here
         _getAllImgs()
         _getAllQuotes()
