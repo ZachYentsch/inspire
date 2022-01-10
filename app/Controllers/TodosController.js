@@ -15,7 +15,7 @@ function _drawTodos() {
 export class TodosController {
     constructor() {
         ProxyState.on('todos', _drawTodos)
-        console.log('hello from todos controller')
+        console.log('hello from toDos controller')
     }
     drawTodos() {
         _drawTodos()
