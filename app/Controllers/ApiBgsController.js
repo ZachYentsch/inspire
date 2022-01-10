@@ -28,8 +28,8 @@ async function _getWeather() {
 // Draw functions
 function _drawRandomQuote() {
     document.getElementById('quote').innerHTML = `
-    <p>${ProxyState.quotes.quote}</p>
-    <p><small>${ProxyState.quotes.author}</small></p>
+    <p class="selectable show qts">${ProxyState.quotes.quote}</p>
+    <p class="position-absolute author text-center justify-content-center"><small>${ProxyState.quotes.author}</small></p>
     `
 }
 

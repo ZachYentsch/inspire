@@ -38,12 +38,28 @@
       </div>
     </div>
   </main>
-  <footer class="bg-dark text-white">
+
+  <div class="modal fade" id="todos" tabindex="-1" aria-labelledby="newListingLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-light">
+          <h5 class="modal-title" id="newTodo">Todo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="modal-body-slot">
+          <!-- FORM INJECTED HERE -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-dark text-white p-2">
     <div class="text-center no-select p-3" id="quote">
       <!-- TODO Make show author on hover -->
       <!-- ANCHOR <p><small></small></p> -->
     </div>
   </footer>
+
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"

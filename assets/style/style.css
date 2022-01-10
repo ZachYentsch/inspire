@@ -13,3 +13,10 @@ body{
     padding-top: 40px;
     padding-bottom: 40px;
   }
+
+  .author{
+    display: none;
+  }
+  .qts:hover + .author{
+    display: block;
+  }
