@@ -1,19 +1,33 @@
 import { ProxyState } from "../AppState.js";
 import { Todos } from "../Models/Todos.js";
-import { saveState } from "../Utils/LocalStorage.js";
+import { User } from "../Models/User.js";
+import { sandBoxApi } from "./AxiosService.js";
+import { usersService } from "./UserService.js";
 
 class TodosService {
-    constructor() {
-        ProxyState.on('todos', saveState)
+    async getTodo() {
+        const res = await sandBoxApi.get()
+        console.log('get user todos', res.data)
+        ProxyState.toDos = res.data.map(t => new Todos(t))
+        console.log('proxystate Users', ProxyState.toDos)
     }
 
-    createTodo(newTodo) {
-        ProxyState.toDos = [new Todos(newTodo), ...ProxyState.toDos]
-        console.log('todos', ProxyState.toDos);
+    async createTodo(todoData) {
+        const res = await sandBoxApi.post('create todo', todoData)
+        console.log('todos', res.data);
+        ProxyState.toDos = [new Todos(res.data), ...ProxyState.toDos]
     }
 
-    deleteTodo(user) {
+    async deleteTodo(user) {
+        const res = await sandBoxApi.delete(`todos/${user}`)
         ProxyState.toDos = ProxyState.toDos.filter(t => t.user !== user)
+    }
+
+    async editTodo(todoData, user) {
+        const res = await sandBoxApi.put(`todos/${user}`, todoData)
+        let editedTodoIndex = ProxyState.toDos.findIndex(t => t.user == user)
+        ProxyState.toDos.splice(editedTodoIndex, 1, new Todos(res.data))
+        ProxyState.toDos = ProxyState.toDos
     }
 }
 

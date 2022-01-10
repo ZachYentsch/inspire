@@ -36,8 +36,7 @@ function _drawRandomQuote() {
 async function drawWeather() {
     let celsius = ProxyState.weather.temp - 273.15
     let fahr = celsius + 32
-    Math.floor(fahr)
-    document.getElementById('weather').innerHTML = `<p class="selectable">${fahr} F</p>`
+    document.getElementById('weather').innerHTML = `<p>${fahr} F</p>`
     // REVIEW Can't get the weather to toggle
     if (drawWeather == celsius) {
         return `<p class="selectable">${celsius} C</p>`

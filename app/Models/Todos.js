@@ -3,7 +3,7 @@ import { generateId } from "../Utils/generateId.js";
 
 export class Todos {
     constructor(data) {
-        this.title = data.title
+        this.title = data.title || ''
         this.id = generateId()
         this.user = data.userId
     }
