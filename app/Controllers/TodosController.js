@@ -5,6 +5,7 @@ import { todosService } from "../Services/TodosService.js";
 
 
 // ANCHOR Draw todos
+// REVIEW WHY CANT I GET TODOS TO DRAW TO THE PAGE.
 function _drawTodos() {
     const todos = ProxyState.toDos
     let template = ''
