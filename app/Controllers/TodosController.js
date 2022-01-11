@@ -56,9 +56,9 @@ export class TodosController {
 
     async editTodo(id) {
         try {
-            let foundTodo = ProxyState.toDos.find(t => t.id == id)
-            document.getElementById('done').inputMode.checked
-        } catch {
+            debugger
+            await todosService.editTodo(id)
+        } catch (error) {
             console.error; (error);
         }
     }

@@ -22,10 +22,10 @@ class TodosService {
         ProxyState.toDos = ProxyState.toDos.filter(t => t.id !== id)
     }
 
-    async editTodo(todoData, id) {
-        const res = await sandBoxApi.put(`${id}`, todoData)
-        let editedTodoIndex = ProxyState.toDos.findIndex(t => t.id == id)
-        ProxyState.toDos.splice(editedTodoIndex, 1, new Todos(res.data))
+    async editTodo(id) {
+        const toDo = ProxyState.toDos.find(t => t.id == id)
+        toDo.completed = !toDo.completed
+        const res = await sandBoxApi.put(toDo.id, toDo)
         ProxyState.toDos = ProxyState.toDos
     }
 }

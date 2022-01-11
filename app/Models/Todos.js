@@ -15,6 +15,6 @@ export class Todos {
     }
 
     get Button() {
-        return `<input type="checkbox" id="done" ${this.completed ? 'done' : ''} onclick="app.todosController.editTodo()">`
+        return `<input type="checkbox" id="done" ${this.completed ? 'checked' : ''} onclick="app.todosController.editTodo('${this.id}')">`
     }
 }
