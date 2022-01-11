@@ -14,7 +14,7 @@ class AppState extends EventEmitter {
 
   images = null
 
-  todos = []
+  toDos = []
 
 }
 

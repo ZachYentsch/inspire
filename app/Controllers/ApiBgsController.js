@@ -33,16 +33,6 @@ function _drawRandomQuote() {
     `
 }
 
-async function drawWeather() {
-    let celsius = ProxyState.weather.temp - 273.15
-    let fahr = celsius + 32
-    document.getElementById('weather').innerHTML = `<p class="selectable" onclick="app.apiBgsController.convertW()">${fahr} F</p>`
-}
-
-async function convertW() {
-    let celsius = ProxyState.weather.temp - 273.15
-    document.getElementById('weather').innerHTML = `<p class="selectable" onclick="app.apiBgsController.drawWeather()>${celsius} C</p>`
-}
 
 
 // ANCHOR CLOCK FUNCTION
@@ -69,7 +59,6 @@ currentTime()
 
 // REVIEW Remember double strings get swapped for backticks
 function _drawRandomImage() {
-    console.log(ProxyState.images.img)
     document.getElementById("RiMg").style.backgroundImage = `url('${ProxyState.images.img}')`
 }
 
@@ -78,7 +67,7 @@ export class ApiBgController {
         // listeners || subscribers here
         ProxyState.on('quotes', _drawRandomQuote)
         ProxyState.on('images', _drawRandomImage)
-        ProxyState.on('weather', drawWeather || convertW)
+        ProxyState.on('weather', this.drawWeather)
         // invoke a function here
         _getAllImgs()
         _getAllQuotes()
@@ -99,6 +88,17 @@ export class ApiBgController {
         } catch (error) {
             console.error(error)
         }
+    }
+
+    async drawWeather() {
+        let celsius = ProxyState.weather.temp - 273.15
+        let fahr = celsius * 1.8000 + 32
+        document.getElementById('weather').innerHTML = `<p class="selectable" onclick="app.apiBgsController.convertW()">${fahr.toFixed(2)} F</p>`
+    }
+
+    async convertW() {
+        let celsius = ProxyState.weather.temp - 273.15
+        document.getElementById('weather').innerHTML = `<p class="selectable" onclick="app.apiBgsController.drawWeather()">${celsius.toFixed(2)} C</p>`
     }
 
 }

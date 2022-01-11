@@ -1,5 +1,6 @@
 import { ProxyState } from "../AppState.js";
 import { confirmation, toast } from "../Services/AlertService.js";
+import { apiBgsService } from "../Services/ApiBgsService.js";
 import { todosService } from "../Services/TodosService.js";
 
 
@@ -8,55 +9,57 @@ import { todosService } from "../Services/TodosService.js";
 function _drawTodos() {
     const todos = ProxyState.toDos
     let template = ''
-    todos.forEach(t => template += t.Template)
+    todos.forEach(t => template += t.TTemplate)
     document.getElementById('toDos').innerHTML = template
 }
 
 export class TodosController {
     constructor() {
-        ProxyState.on('todos', _drawTodos)
+        ProxyState.on('toDos', _drawTodos)
         console.log('hello from toDos controller')
+
+        todosService.getTodo()
     }
     drawTodos() {
         _drawTodos()
-        document.getElementById('todos').innerHTML = template
+        document.getElementById('toDos').innerHTML = template
     }
 
-    async createTodo(user) {
+    async createTodo(id) {
         try {
             window.event.preventDefault()
+            console.log('submitted')
             let form = window.event.target
-            const newTodo = {
-                title: form.title.value,
-                user: user
+            const todoData = {
+                description: form.description.value,
             }
+            console.log('new Todo', todoData)
+            await todosService.createTodo(todoData)
+            form.reset()
         } catch (error) {
-            console.log(error.message)
+            console.error(error)
         }
     }
 
-    async removeTodo(user) {
+    async removeTodo(id) {
         try {
-            const foundTodo = ProxyState.toDos.find(t => t.user == user)
+            const foundTodo = ProxyState.toDos.find(t => t.id == id)
             console.log('deleting', foundTodo)
-            if (await confirmation(`Are you sure you want to delete ${foundTodo.title}?`)) {
-                await todosService.deleteTodo(user)
-                toast(`${foundTodo.title} was removed!`)
+            if (await confirmation(`Are you sure you want to delete ${foundTodo.description}?`)) {
+                await todosService.removeTodo(id)
+                toast(`${foundTodo.description} was removed!`)
             }
         } catch (error) {
             console.log(error.message)
         }
     }
 
-    // async editTodo(user) {
-    //     try {
-    //         let foundTodo = ProxyState.toDos.find(t => t.user == user)
-
-    //         document.getElementById('todos').innerHTML =
-
-    //         console.log('todo in Edit', foundTodo)
-    //     } catch {
-    //         console.log('error.message');
-    //     }
-    // }
+    async editTodo(id) {
+        try {
+            let foundTodo = ProxyState.toDos.find(t => t.id == id)
+            document.getElementById('done').inputMode.checked
+        } catch {
+            console.error; (error);
+        }
+    }
 }

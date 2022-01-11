@@ -1,17 +1,20 @@
-import { ProxyState } from "../AppState.js";
-import { generateId } from "../Utils/generateId.js";
+import { generateId } from "../Utils/generateId.js"
 
 export class Todos {
     constructor(data) {
-        this.title = data.title || ''
-        this.id = generateId()
-        this.user = data.userId
+        this.description = data.description || ''
+        this.id = data.id || generateid()
+        this.completed = data.completed || false
     }
 
-    get Template() {
+    get TTemplate() {
         return `
-        <li>${this.title} <i class="mdi mdi-delete-circle-outline selectable" onclick="app.todosController.deleteTodo('${this.user}')"></i>
-        </li> 
-        <form onsubmit="app.todosController.createTodo('${this.user}')">`
+        ${this.Button}
+        <li>${this.description}</li>
+            <i i class="mdi mdi-delete-circle-outline selectable" onclick="app.todosController.removeTodo('${this.id}')" ></i> `
+    }
+
+    get Button() {
+        return `<input type="checkbox" id="done" ${this.completed ? 'done' : ''} onclick="app.todosController.editTodo()">`
     }
 }
